@@ -311,7 +311,7 @@ func UlViewSetUpdateHistoryCallback(view ULView, callback ULUpdateHistoryCallbac
 // @note  This flag is automatically set whenever the page content changes
 //        but you can set it directly in case you need to force a repaint.
 func UlViewSetNeedsPaint(view ULView, needsPaint bool) {
-	C.ulViewSettNeedsPaint(view, needsPaint)
+	C.ulViewSetNeedsPaint(view, needsPaint)
 }
 
 // UlViewGetNeedsPaint Whether or not a view should be painted during the next call to ulRender.
