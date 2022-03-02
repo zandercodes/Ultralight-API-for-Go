@@ -4,7 +4,7 @@ config.go
 Created by JulianZander on 28.02.2022 at 16:15 with GoLand
 Copyright © 2022 ZanderCodes
 */
-package main
+package UltralightAPIforGo
 
 /*
 #cgo CFLAGS: -I${SRCDIR}/include
@@ -18,8 +18,8 @@ package main
 */
 import "C"
 
-// ULCreateConfig Create config with default values (see <Ultralight/platform/Config.h>).
-func ULCreateConfig() ULConfig {
+// UlCreateConfig Create config with default values (see <Ultralight/platform/Config.h>).
+func UlCreateConfig() ULConfig {
 	// return *(*ULConfig)(unsafe.Pointer(C.ulCreateConfig()))
 	return (ULConfig)(C.ulCreateConfig())
 }
