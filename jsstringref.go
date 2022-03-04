@@ -117,22 +117,25 @@ func JSStringGetUTF8CString(string JSStringRef, buffer []byte, bufferSize uint32
 	return uint32(C.JSStringGetUTF8CString(string, p, (C.size_t)(bufferSize)))
 }
 
-// JSStringIsEqual function as declared in JavaScriptCore/JSStringRef.h:134
+// JSStringIsEqual
+// @function
+// @abstract     Tests whether two JavaScript strings match.
+// @param a      The first JSString to test.
+// @param b      The second JSString to test.
+// @result       true if the two strings match, otherwise false.
 func JSStringIsEqual(a JSStringRef, b JSStringRef) bool {
-	ca, _ := *(*C.JSStringRef)(unsafe.Pointer(&a)), cgoAllocsUnknown
-	cb, _ := *(*C.JSStringRef)(unsafe.Pointer(&b)), cgoAllocsUnknown
-	__ret := C.JSStringIsEqual(ca, cb)
-	__v := (bool)(__ret)
-	return __v
+	return bool(C.JSStringIsEqual(a, b))
 }
 
-// JSStringIsEqualToUTF8CString function as declared in JavaScriptCore/JSStringRef.h:142
+// JSStringIsEqualToUTF8CString
+// @function
+// @abstract     Tests whether a JavaScript string matches a null-terminated UTF8 string.
+// @param a      The JSString to test.
+// @param b      The null-terminated UTF8 string to test.
+// @result       true if the two strings match, otherwise false.
 func JSStringIsEqualToUTF8CString(a JSStringRef, b string) bool {
-	ca, _ := *(*C.JSStringRef)(unsafe.Pointer(&a)), cgoAllocsUnknown
-	b = safeString(b)
-	cb, _ := unpackPCharString(b)
-	__ret := C.JSStringIsEqualToUTF8CString(ca, cb)
-	runtime.KeepAlive(b)
-	__v := (bool)(__ret)
-	return __v
+	cStr := C.CString(b)
+	defer C.free(unsafe.Pointer(cStr))
+	runtime.KeepAlive(b) // i don't know for what
+	return bool(C.JSStringIsEqualToUTF8CString(a, b))
 }
