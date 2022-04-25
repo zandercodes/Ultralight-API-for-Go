@@ -1,3 +1,6 @@
+# Important
+      Currently not fully functional and tested
+
 # Ultralight-API-for-Go
 Go wrapper for https://ultralig.ht/
 
